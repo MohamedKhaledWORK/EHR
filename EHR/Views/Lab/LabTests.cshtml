@@ -1,0 +1,69 @@
+﻿@model IEnumerable<LabViewModel>
+
+@{
+    ViewData["Title"] = "LabTests";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+
+            <a asp-action="Index" ><h2 class="inactive underlineHover">Personal Details </h2></a>
+            <h2 class="active"> LabTests</h2>
+            <a asp-action="Logout"><h4 style="color:red">Logout</h4></a>
+
+            @if (Model.Count() > 0)
+            {
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>LabTestType</th>
+                            <th>TestDate</th>
+                            <th>TestResult</th>
+                            <th>NormalRange</th>
+                            <th>TestStatus</th>
+                            <th>Actions</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var test in Model)
+                        {
+                            <tr>
+                                <td>@test.Patient.Name</td>
+                                <td>@test.LabTestType</td>
+                                <td>@test.TestDate</td>
+                                <td>@test.TestResult</td>
+                                <td>@test.NormalRange</td>
+                                <td>@test.TestStatus</td>
+                                <td>
+                                    <a asp-action="EditTest" asp-route-id="@test.Id"
+                                       class="fadeIn fourth"
+                                       style="background-color: #56baed; padding: 5px 10px; border-radius: 5px; text-decoration: none; color: white;">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="mt-5 alert alert-warning">
+                    <h1>There is No Tests</h1>
+                </div>
+            }
+
+        </div>
+    </div>
+</body>
+</html>

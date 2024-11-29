@@ -1,0 +1,45 @@
+﻿@model Staff
+
+@{
+    ViewData["Title"] = "Staff";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="fadeIn first">
+                <h1>
+                    Edit Personal info
+                </h1>
+                <form asp-action="Edit" method="post">
+                    <input asp-for="Name" class="fadeIn second" placeholder="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <br />
+                    <input asp-for="UserName" class="fadeIn second" placeholder="Username" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Password" type="password" class="fadeIn second" placeholder="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Email" class="fadeIn second" placeholder="Email" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <br />
+                    <label asp-for="Role"></label>
+                    <input asp-for="Role" class="fadeIn second" placeholder="Role" readonly/>
+                    <br />
+                    <input type="submit"  class="fadeIn fourth" value="Submit" />
+                    <a asp-action="Index">Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

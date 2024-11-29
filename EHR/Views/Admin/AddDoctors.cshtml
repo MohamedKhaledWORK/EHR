@@ -1,0 +1,53 @@
+﻿@model Doctors
+
+@{
+    ViewData["Title"] = "Doctors";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+   
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+
+            <div class="fadeIn first">
+                <h1>
+                    Add Doctors
+                </h1>
+                <form asp-action="AddDoctors" method="post">
+                    <input asp-for="Staff.Name"  class="fadeIn second"  placeholder="Name">
+                    <span asp-validation-for="Staff.Name" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Staff.UserName"  class="fadeIn second"  placeholder="Username">
+                    <span asp-validation-for="Staff.UserName" class="text-danger" > </span>
+                    <br />
+                    <input asp-for="Staff.Email" class="fadeIn second"  placeholder="Email">
+                    <span asp-validation-for="Staff.Email" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Specialty" class="fadeIn second"  placeholder="Specialty">
+                    <span asp-validation-for="Specialty" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Phone"  class="fadeIn second"  placeholder="Phone">
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                    <br />
+                    <input asp-for="OfficeAddress" class="fadeIn second"  placeholder="OfficeAddress">
+                    <span asp-validation-for="OfficeAddress" class="text-danger"></span>
+                    <br />
+                    <label asp-for="Staff.Role">Role</label>
+                    <input asp-for="Staff.Role" class="fadeIn second" value="Doctor" readonly>
+                    <br />
+                    <input type="submit" class="fadeIn fourth" value="Submit">
+                    <a asp-action="Index">Back to List</a>
+                </form>
+            </div>
+         </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Labtest";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <a asp-action="Index"><h2 class="inactive underlineHover"> Personal Details </h2></a>
+            <a asp-action="AddPatient"><h2 class="inactive underlineHover">AddPatient</h2></a>
+            <a asp-action="Visit"><h2 class="inactive underlineHover">Visits</h2></a>
+            <h2 class="active">LabTests</h2>
+            <a asp-action="Logout"><h4 style="color:red">Logout</h4></a>
+
+            <div class="fadeIn first">
+
+                <a asp-action="RequestTest"><input type="button" class="fadeIn fourth" value="Request"></a>
+                <br />
+                @using (Html.BeginForm("ResultTest", "Receptionist", FormMethod.Get))
+                {
+                    <input class="form-control" type="text" name="search" placeholder="Patient's UserName" />
+                    <input  type="submit" class="fadeIn fourth" value="Result" />
+                }
+               
+                <div class="mt-5 alert alert-warning">
+                    <h1>
+                        @if (TempData["Message"] is not null)
+                        {
+                            <div id="tempMessage" class="alert alert-success"> @TempData["Message"]</div>
+                        }
+                    </h1>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+    <script>
+        // Show the message if it exists, then hide it after 5 seconds
+        window.onload = function () {
+            var messageDiv = document.getElementById('tempMessage');
+            if (messageDiv) {
+                messageDiv.style.display = 'block'; // Show the message
+                setTimeout(() => messageDiv.style.display = 'none', 7500); // Hide after 5 seconds
+            }
+        }
+    </script>
+</body>
+</html>

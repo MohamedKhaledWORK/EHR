@@ -1,0 +1,70 @@
+﻿@model TimeViewModel
+@{
+    ViewData["Title"] = "Availability";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+
+            <h1 class="active">Add Time</h1>
+
+            <div class="fadeIn first">
+                    <input asp-for="DoctorUserName"  value="@ViewBag.doctor.Staff.UserName" readonly>
+                    <form asp-action="AvailableTime" method="post">
+                    <input asp-for="DoctorUserName" Type="hidden"class="fadeIn second" placeholder="Name" value="@ViewBag.doctor.Staff.UserName" readonly>
+                    
+                    <div class="fadeIn second">
+                        <label asp-for="DayOfWeek">DayOfWeek:</label>
+                        <select asp-for="DayOfWeek">
+                            <option value="">Select DayOfWeek</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                            <option value="Monday">Monday</option>  
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thurday">Thurday</option>
+                            <option value="Friday">Friday</option>
+                        </select>
+                        <span asp-validation-for="DayOfWeek" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <label for="timeSlot">Select Time Slot:</label>
+                    <select id="timeSlot" name="TimeSlot" required>
+                        <option value="">-- Select a Time Slot --</option>
+                        <option value="09:00">09:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 AM</option>
+                        <option value="13:00">01:00 PM</option>
+                        <option value="14:00">02:00 PM</option>
+                        <option value="15:00">03:00 PM</option>
+                        <option value="16:00">04:00 PM</option>
+                        <option value="17:00">05:00 PM</option>
+                        <option value="18:00">07:00 PM</option>
+                        <option value="19:00">08:00 PM</option>
+                    </select>
+                    <span asp-validation-for="TimeSlot" class="text-danger"></span>
+                    <br />
+                    <input type="submit" class="fadeIn fourth" value="submit">
+                    <a asp-action="Index">Back to Doctors List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @section ValidationScript
+    {
+        <partial name="_ValidationScriptsPartial" />
+    }
+</body>
+</html>
+

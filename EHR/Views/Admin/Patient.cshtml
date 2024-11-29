@@ -1,0 +1,75 @@
+﻿@model IEnumerable<PatientViewModel>
+
+@{
+    ViewData["Title"] = "Patients";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+
+            <a asp-action="Index"><h2 class="inactive underlineHover">Doctors</h2></a>
+            <a asp-action="Staff"><h2 class="inactive underlineHover">Staff</h2></a>
+            <h2 class="active">Patients</h2>
+            <a asp-action="Visits"><h2 class="inactive underlineHover">Visits</h2></a>
+            <a asp-action="Logout"><h4 style="color:red">Logout</h4></a>
+
+            @if (Model.Count() > 0)
+            {
+                <div class="table-container">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Medical History</th>
+                                <th>Blood Type</th>
+                                <th>Emergency Contact</th>
+                                <th>Has Insurance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var patient in Model)
+                            {
+                                <tr>
+                                    <td>@patient.Name</td>
+                                    <td>@patient.Email</td>
+                                    <td>@patient.Age</td>
+                                    <td>@patient.Gender</td>
+                                    <td>@patient.Phone</td>
+                                    <td>@patient.Address</td>
+                                    <td>@patient.MedicalHistory</td>
+                                    <td>@patient.BloodType</td>
+                                    <td>@patient.EmergencyContact</td>
+                                    <td>@patient.HasInsurance
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="mt-5 alert alert-warning">
+                    <h1>There is No Patient</h1>
+                </div>
+            }
+        </div>
+    </div>
+
+</body>
+</html>

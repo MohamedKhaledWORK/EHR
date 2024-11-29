@@ -1,0 +1,52 @@
+﻿@model SimpleViewModel
+
+@{
+    ViewData["Title"] = "EditVisit";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="fadeIn first">
+                <h1>
+                    Edit Visit
+                </h1>
+                <form asp-action="EditV" method="post">
+                    <input asp-for="PatientUsername" class="fadeIn second" placeholder="Patient's Username"  readonly />
+                    <br />
+                    <input asp-for="DoctorUserName" class="fadeIn second" placeholder="Doctor's Username" readonly />
+                    <br />
+                    <div>
+                        <label for="datetime"> Date & Time:</label>
+                        <input asp-for="Date"  readonly> 
+                    </div>
+                    <input asp-for="Diagnosis" class="fadeIn second" placeholder="Diagnosis" />
+                    <span asp-validation-for="Diagnosis"></span>
+                    <br />
+                    <div>
+                        <label for="datetime"> Follow Up:</label>
+                        <input asp-for="Date" type="datetime-local" >
+                    </div>
+                    <input asp-for="TreatmentPlan" class="fadeIn second" placeholder="TreatmentPlan" />
+                    <span asp-validation-for="TreatmentPlan"></span>
+                    <br />
+                    <input asp-for="ReasonForVisit" class="fadeIn second" placeholder="ReasonForVisit" readonly/>
+                    <br />
+                    <input asp-for="VisitType" class="fadeIn second" placeholder="ReasonForVisit" readonly />
+                    <br />
+                    <input type="submit" class="fadeIn fourth" value="Submit" />
+                    <a asp-action="Visits">Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

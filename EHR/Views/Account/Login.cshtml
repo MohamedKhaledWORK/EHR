@@ -1,0 +1,56 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            @if (TempData["Message"] is not null)
+            {
+                <div id="tempMessage" class="alert alert-success"> @TempData["Message"]</div>
+            }
+            <h2 class="active"> Sign In </h2>
+            <div class="fadeIn first">
+                <div class="button-container">
+                    <a asp-action="NewUser" class="btn-primary">For New User Create Your Password First</a>
+                </div>
+                <form asp-action="Login" method="post">
+                    <input asp-for="UserName"  class="fadeIn second" placeholder="Username">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Password" class="fadeIn third" placeholder="password">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <br />
+                    <input type="submit" class="fadeIn fourth" value="Log In">
+                    <a asp-action="Intro">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @section ValidationScript
+    {
+        <partial name="_ValidationScriptsPartial" />
+    }
+    <script>
+        // Show the message if it exists, then hide it after 5 seconds
+        window.onload = function () {
+            var messageDiv = document.getElementById('tempMessage');
+            if (messageDiv) {
+                messageDiv.style.display = 'block'; // Show the message
+                setTimeout(() => messageDiv.style.display = 'none', 7500); // Hide after 5 seconds
+            }
+        }
+    </script>
+</body>
+</html>
+

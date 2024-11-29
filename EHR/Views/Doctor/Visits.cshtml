@@ -1,0 +1,149 @@
+﻿@model IEnumerable<VisitViewModel>
+
+@{
+    ViewData["Title"] = "Visits";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+
+            <a asp-action="Index"><h2 class="inactive underlineHover">Personal Details</h2></a>
+            <h2 class="active">Visits</h2>
+            <a asp-action="Services"><h2 class="inactive underlineHover">Medication Services</h2></a>
+            <a asp-action="Logout"><h4 style="color:red">Logout</h4></a>
+            @using (Html.BeginForm("Visits", "Doctor", FormMethod.Get))
+            {
+                <input class="form-control" type="text" name="search" placeholder="Patient's UserName" />
+                <input type="submit" class="fadeIn fourth" value="Search" />
+            }
+            @if (Model.Count() > 0)
+            {
+                <div style="overflow-x:auto;">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Patient Name</th>
+                            <th>Doctor Name</th>
+                            <th>Date</th>
+                            <th>Reason For Visit</th>
+                            <th>Visit Type</th>
+                            <th>Diagnosis</th>
+                            <th>Follow-Up Date</th>
+                            <th>Treatment Plan</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var visit in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @visit.Patient.Name
+                                    <i class="fas fa-info-circle" onclick="showPatientDetails('@visit.Patient.Name', '@visit.Patient.Age', '@visit.Patient.Gender', '@visit.Patient.BloodType', '@visit.Patient.MedicalHistory')" style="cursor: pointer;"></i>
+                                </td>
+                                <td>@visit.Doctor.Staff.Name</td>
+                                <td>@visit.Date</td>
+                                <td>@visit.ReasonForVisit</td>
+                                <td>@visit.VisitType</td>
+                                <td>@(visit.Diagnosis ?? "Not Determined")</td>
+                                <td>@visit.FollowUpDate</td>
+                                <td>@(visit.TreatmentPlan ?? "Not Determined")</td>
+                                <td>
+                                    <a asp-action="EditV" asp-route-id="@visit.Id" class="btn-edit">Details&Edit</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                </div>
+            }
+            else
+            {
+                <div class="mt-5 alert alert-warning">
+                    <h1>No Visits</h1>
+                </div>
+            }
+
+        </div>
+    </div>
+
+    <!-- Patient Details Modal -->
+    <div id="patientModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Patient Details</h2>
+            <p><strong>Name:</strong> <span id="patientName"></span></p>
+            <p><strong>Age:</strong> <span id="patientAge"></span></p>
+            <p><strong>Gender:</strong> <span id="patientGender"></span></p>
+            <p><strong>Blood Type:</strong> <span id="patientBloodType"></span></p>
+            <p><strong>Medical History:</strong> <span id="patientMedicalHistory"></span></p>
+        </div>
+    </div>
+
+    <!-- Add your styles and script -->
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 70%;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+            }
+    </style>
+
+    <script>
+        function showPatientDetails(name, age, gender, bloodType, medicalHistory) {
+            // Show patient details in the modal
+            document.getElementById("patientName").innerText = name;
+            document.getElementById("patientAge").innerText = age;
+            document.getElementById("patientGender").innerText = gender;
+            document.getElementById("patientBloodType").innerText = bloodType;
+            document.getElementById("patientMedicalHistory").innerText = medicalHistory;
+
+            // Display the modal
+            document.getElementById("patientModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("patientModal").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

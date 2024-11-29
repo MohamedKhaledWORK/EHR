@@ -1,0 +1,72 @@
+﻿@model IEnumerable<PrescriptionViewModel>
+
+@{
+    ViewData["Title"] = "Prescriptions";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+
+
+            <a asp-action="Index"><h2 class="inactive underlineHover">Personal Details</h2></a>
+            <a asp-action="Visit"><h2 class="inactive underlineHover"> Previous Visits </h2></a>
+            <h2 class="active">Prescriptions</h2>
+            <a asp-action="LabTests"><h2 class="inactive underlineHover"> Lab Tests </h2></a>
+            <a asp-action="LogoutP"><h4 style="color:red">Logout</h4></a>
+
+            @if (Model.Count() > 0)
+            {
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            
+                            <th>Doctor Name</th>
+                            <th>MedicationName</th>
+                            <th>Dosage</th>
+                            <th>FreqPerDay</th>
+                            <th>Duration</th>
+                            <th>Comments</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var prescription in Model)
+                        {
+                            <tr>
+
+                                <td>@prescription.DoctorUserName</td>
+                                <td>@prescription.MedicationName</td>
+                                <td>@prescription.Dosage</td>
+                                <td>@prescription.FreqPerDay</td>
+                                <td>@prescription.Duration</td>
+                                <td>@prescription.Comments</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="mt-5 alert alert-warning">
+                    <h1>
+                        No Prescriptions
+                    </h1>
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+</body>
+</html>

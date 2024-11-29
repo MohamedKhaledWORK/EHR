@@ -1,0 +1,90 @@
+﻿@model PatientViewModel
+@{
+    ViewData["Title"] = @Model.UserName;
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <h2 class="active"> Personal Details </h2>
+            <a asp-action="Visit"><h2 class="inactive underlineHover">Previous Visits</h2></a>
+            <a asp-action="Prescription"><h2 class="inactive underlineHover">Prescriptions</h2></a>
+            <a asp-action="LabTests"><h2 class="inactive underlineHover"> Lab Tests </h2></a>
+            <a asp-action="LogoutP"><h4 style="color:red">Logout</h4></a>
+
+            <div class="fadeIn first">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Name</strong></td>
+                            <td>@Model.Name</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Username</strong></td>
+                            <td>@Model.UserName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td>@Model.Email</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Age</strong></td>
+                            <td>@Model.Age</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Gender</strong></td>
+                            <td>@Model.Gender</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Address</strong></td>
+                            <td>@Model.Address</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phone</strong></td>
+                            <td>@Model.Phone</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Blood Type</strong></td>
+                            <td>@Model.BloodType</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MedicalHistory</strong></td>
+                            <td>@Model.MedicalHistory</td>
+                        </tr>
+                        <tr>
+                            <td><strong>EmergencyContact</strong></td>
+                            <td>@Model.EmergencyContact</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HasInsurance</strong></td>
+                            <td>@Model.HasInsurance</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="display: flex; justify-content: space-between; margin: 20px 40px 10px 40px;">
+
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="fadeIn fourth" style="background-color: #39ace7; padding: 10px 20px; border-radius: 5px; text-decoration: none; color: white;">Edit</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

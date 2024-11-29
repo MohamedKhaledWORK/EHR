@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Intro";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          
+            <h2 class="active"> Welcome! </h2>
+            <div class="fadeIn first">
+
+                <a asp-action="Login"><input type="button" class="fadeIn fourth" value="Staff"></a>
+
+                <a asp-action="LoginP">  <input type="submit" class="fadeIn fourth" value="Patient"></a>
+               
+            </div>
+        </div>
+    </div>
+</body>
+</html>

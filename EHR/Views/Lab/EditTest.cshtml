@@ -1,0 +1,58 @@
+﻿@model SimpleLabViewModel
+@{
+    ViewData["Title"] = "AddResult";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+           
+            <h1 class="active">Edit Test</h1>
+
+            <div class="fadeIn first">
+
+                <form asp-action="EditTest" method="post">
+                    <input asp-for="PatientUserName" class="fadeIn second"  placeholder="Name" readonly>
+                    <br />
+                    <input asp-for="LabTestType" class="fadeIn second" placeholder="LabTestType" readonly>
+                    <br />
+                    <input asp-for="TestDate" class="fadeIn second" placeholder="TestDate" readonly>
+                    <br />
+                    <input asp-for="TestResult" class="fadeIn second" placeholder="TestResult">
+                    <span asp-validation-for="TestResult" class="text-danger"></span>
+                    <br />
+                    <input asp-for="NormalRange" class="fadeIn second" placeholder="NormalRange">
+                    <span asp-validation-for="NormalRange" class="text-danger"></span>
+                    <br />
+                    <div class="fadeIn second">
+                        <label asp-for="TestStatus">TestStatus:</label>
+                        <select asp-for="TestStatus">
+                            <option value="">Select TestStatus</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                        <span asp-validation-for="TestStatus" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <input type="submit" class="fadeIn fourth" value="Submit">
+                    <a asp-action="LabTests">Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @section ValidationScript
+    {
+        <partial name="_ValidationScriptsPartial" />
+    }
+</body>
+</html>
+

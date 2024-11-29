@@ -1,0 +1,65 @@
+﻿@model SimpleLabViewModel
+
+@{
+    ViewData["Title"] = "Request Test";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="fadeIn first">
+                <h1>
+                    Lab Test
+                </h1>
+                <form asp-action="RequestTest" method="post">
+                    <input asp-for="PatientUserName" class="fadeIn second" placeholder="Username" />
+                    <span asp-validation-for="PatientUserName" class="text-danger"></span>
+                    <br />
+                    <label for="LabTestType">Lab Test Type</label>
+                    <select id="LabTestType" asp-for="LabTestType" class="fadeIn second" onchange="updateNormalRange()">
+                        <option value="">Select a Test Type</option>
+                        @if (ViewBag.LabTestTypes != null)
+                        {
+                            @foreach (var test in (List<LabTestTypeViewModel>)ViewBag.LabTestTypes)
+                            {
+                                <option value="@test.LabTestType">@test.LabTestType</option>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="LabTestType" class="text-danger"></span>
+                    <br />
+                    <label for="NormalRange">Normal Range</label>
+                    <input id="NormalRange" type="text" asp-for="NormalRange" class="fadeIn second" readonly />
+                    <br />
+                    <div>
+                        <label asp-for="TestDate">Date&Time</label>
+                        <input asp-for="TestDate" id="datetime" name="datetime">
+                    <span asp-validation-for="TestDate" class="text-danger"></span>
+                    </div>
+                    <input asp-for="TestStatus" type="hidden" class="fadeIn second" placeholder="TestStatus" value="Pending" />
+                    <br />
+                    
+                    <input type="submit" class="fadeIn fourth" value="Submit" />
+                    <a asp-action="LabTest">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateNormalRange() {
+            const labTestTypes = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.LabTestTypes ?? new List<LabTestTypeViewModel>()));
+            const selectedTest = document.getElementById("LabTestType").value;
+            const test = labTestTypes.find(test => test.LabTestType === selectedTest);
+            document.getElementById("NormalRange").value = test ? test.NormalRange : "";
+        }
+    </script>
+</body>
+</html>

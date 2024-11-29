@@ -1,0 +1,50 @@
+﻿@model PrescriptionViewModel
+
+@{
+    ViewData["Title"] = "Add Prescription";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="fadeIn first">
+                <h1>
+                    Prescription
+                </h1>
+                <form asp-action="AddPrescription" method="post">
+                    <input asp-for="PatientUserName" class="fadeIn second" placeholder="Username" />
+                    <span asp-validation-for="PatientUserName" class="text-danger"></span>
+                    <br />
+                    <input asp-for="DoctorUserName" class="fadeIn second" placeholder="DoctorUserName" value="HandleinAction" type="hidden" />
+                    <input asp-for="MedicationName" class="fadeIn second" placeholder="MedicationName" />
+                    <span asp-validation-for="MedicationName" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Dosage" class="fadeIn second" placeholder="Dosage">
+                    <span asp-validation-for="Dosage" class="text-danger"></span>
+                     <br />                      
+                    <input asp-for="FreqPerDay" class="fadeIn second" placeholder="FreqPerDay" />
+                    <span asp-validation-for="FreqPerDay" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Duration" class="fadeIn second" placeholder="Duration" />
+                    <span asp-validation-for="Duration" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Comments" class="fadeIn second" placeholder="Comments" />
+                    <span asp-validation-for="Comments" class="text-danger"></span>
+                    <br />
+                    <input type="submit" class="fadeIn fourth" value="Submit" />
+                    <a asp-action="Prescriptions">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+  
+</body>
+</html>

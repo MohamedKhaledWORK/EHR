@@ -1,0 +1,40 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "NewUser";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <h2 class="active"> Create new Password </h2>
+            <div class="fadeIn first">
+                <div class="button-container">
+                </div>
+                <form asp-action="NewUserP" method="post">
+                    <input asp-for="UserName" class="fadeIn second" placeholder="Username">
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Password" class="fadeIn third" placeholder="New Password">
+                    <br />
+                    <input type="submit" class="fadeIn fourth" value="Submit">
+                    <a asp-action="LoginP">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @section ValidationScript
+    {
+        <partial name="_ValidationScriptsPartial" />
+    }
+</body>
+</html>
+

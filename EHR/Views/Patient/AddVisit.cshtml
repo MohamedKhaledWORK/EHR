@@ -1,0 +1,91 @@
+﻿@model SimpleViewModel
+
+@{
+    ViewData["Title"] = "AddVisit";
+    var patient = @ViewBag.Patient;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <div class="fadeIn first">
+                <h1>
+                    Add Visit
+                </h1>
+                <form asp-action="AddVisit" method="post">
+                    <input asp-for="PatientUsername" class="fadeIn second" placeholder="Patient's Username" value="@ViewBag.PatientName" readonly />
+                    <br />
+                    
+                    <div>
+                        <label asp-for="DoctorUserName">Select Doctor</label>
+                        <select id="DoctorUserName" name="DoctorUserName" onchange="updateTimeSlots()">
+                            <option value="">-- Select Doctor --</option>
+
+                            @foreach (var doctor in ViewBag.Doctors)
+                            {
+                                <option value="@doctor.DoctorName">@doctor.DoctorName</option>
+                            }
+                        </select>
+                        <span asp-validation-for="DoctorUserName" class="text-danger"></span>
+                    </div>
+                    <br />
+
+                    <div>
+                        <label for="Date">Select Time Slot</label>
+                        <select asp-for="Date" id="TimeSlots" name="Date">
+                            <option value="">-- Select Time Slot --</option>
+                        </select>
+                    </div>                
+                    <br />
+
+                    <input asp-for="ReasonForVisit" class="fadeIn second" placeholder="ReasonForVisit" />
+                    <span asp-validation-for="ReasonForVisit" class="text-danger"></span>
+                    <br />
+                    <select asp-for="VisitType">
+                        <option value="">-- Select a VisitType --</option>
+                        <option value="In-person">In-person</option>
+                        <option value="Telehealth">Telehealth</option>
+                    </select>
+                    <br />
+                    <input type="submit" class="fadeIn fourth" value="Submit" />
+                    <a asp-action="Visit">Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateTimeSlots() {
+            // Parse the ViewBag data into a JavaScript object
+            const doctorsData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Doctors));
+
+            // Get the selected doctor's name
+            const selectedDoctor = document.getElementById('DoctorUserName').value;
+            const timeSlotDropdown = document.getElementById('TimeSlots');
+
+            // Clear existing time slots
+            timeSlotDropdown.innerHTML = '<option value="">-- Select Time Slot --</option>';
+
+            // Find the selected doctor in the doctors data
+            const doctor = doctorsData.find(d => d.DoctorName === selectedDoctor);
+
+            // If a doctor is selected, populate the time slots
+            if (doctor) {
+                doctor.TimeSlots.forEach(slot => {
+                    const option = document.createElement('option');
+                    option.value = slot;
+                    option.textContent = slot;
+                    timeSlotDropdown.appendChild(option);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

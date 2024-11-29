@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Patient Services";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <a asp-action="Index"><h2 class="inactive underlineHover"> Personal Details</h2></a>
+            <a asp-action="Visits"><h2 class="inactive underlineHover">Visits</h2></a>
+            <h2 class="active">Medication Services</h2>
+            <a asp-action="Logout"><h4 style="color:red">Logout</h4></a>
+
+            <div class="fadeIn first">
+
+                <a asp-action="LabTests"><input type="button" class="fadeIn fourth" value="LabTests"></a>
+
+                <a asp-action="Prescriptions"><input type="submit" class="fadeIn fourth" value="Prescriptions"></a>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

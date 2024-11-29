@@ -1,0 +1,94 @@
+﻿@model Patient
+@{
+    ViewData["Title"] = "Signup";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <a asp-action="LoginP"><h2 class="inactive underlineHover">Sign In</h2></a>
+            <h2 class="active">Sign Up</h2>
+
+            <div class="fadeIn first">
+
+                <form asp-action="Register" method="post">
+                    <input asp-for="Name" class="fadeIn second"  placeholder="Name">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Username"  class="fadeIn second" placeholder="Username">
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Password"  class="fadeIn third" placeholder="Password">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Email"  class="fadeIn second"  placeholder="Email">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Age" class="fadeIn second"  placeholder="Age">
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                    <br />
+                    <div class="fadeIn second">
+                        <label class="col-form-label" asp-for="Gender">Gender:</label>
+                        <div>
+                            <input asp-for="Gender" type="radio" value="Male" id="Male">
+                            <label for="Male">Male</label>
+                            <input asp-for="Gender" type="radio" value="Female" id="Female">
+                            <label for="Female">Female</label>
+                        </div>
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <input asp-for="Address" class="fadeIn second"  placeholder="Address">
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                    <br />
+                    <input asp-for="Phone"  class="fadeIn second"  placeholder="Phone">
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                    <br />
+                    <div class="fadeIn second">
+                        <label asp-for="BloodType">Blood Type:</label>
+                        <select asp-for="BloodType">
+                            <option value="">Select Blood Type</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                        <span asp-validation-for="BloodType" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <input asp-for="MedicalHistory"  class="fadeIn second"  placeholder="MedicalHistory">
+                    <span asp-validation-for="MedicalHistory" class="text-danger"></span>
+                    <br />
+                    <input asp-for="EmergencyContact"  class="fadeIn second"  placeholder="EmergencyContact">
+                    <span asp-validation-for="EmergencyContact" class="text-danger"></span>
+                    <br />
+                    <label class="col-form-label" asp-for="HasInsurance"></label>
+                    <input asp-for="HasInsurance" class="form-control"  >
+                    <span asp-validation-for="HasInsurance" class="text-danger"></span>
+                    <br />
+                    <input type="submit" class="fadeIn fourth" value="Log In">
+                    <a asp-action="Intro">Back</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @section ValidationScript
+    {
+        <partial name="_ValidationScriptsPartial" />
+    }
+</body>
+</html>
+

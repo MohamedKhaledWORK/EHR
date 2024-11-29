@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DoctorAvailability>
+
+@{
+    ViewData["Title"] = "Show";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+                <h1>Available Times</h1>
+                <a asp-action="Index">Back</a>
+            @if (Model.Count() > 0)
+            {
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>DoctorName</th>
+                            <th>DayOfWeek</th>
+                            <th>TimeSlot</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var test in Model)
+                        {
+                            <tr>
+                                <td>@test.Doctor.Staff.UserName</td>
+                                <td>@test.DayOfWeek</td>
+                                <td>@test.TimeSlot</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="mt-5 alert alert-warning">
+                    <h1>No Available Time for This Doctor</h1>
+                </div>
+            }
+
+        </div>
+    </div>
+</body>
+</html>

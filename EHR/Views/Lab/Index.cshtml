@@ -1,0 +1,60 @@
+﻿@model StaffViewModel
+
+@{
+    ViewData["Title"] = "Laboratory";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/css/account.css" rel="stylesheet" />
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <h2 class="active"> Personal Details </h2>
+            <a asp-action="LabTests"><h2 class="inactive underlineHover">LabTests</h2></a>
+            <a asp-action="Logout"><h4 style="color:red">Logout</h4></a>
+
+            <div class="fadeIn first">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Name</strong></td>
+                            <td>@Model.Name</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Username</strong></td>
+                            <td>@Model.UserName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td>@Model.Email</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Role</strong></td>
+                            <td>@Model.Role</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="display: flex; justify-content: space-between; margin: 20px 40px 10px 40px;">
+
+                    <a asp-action="Edit" asp-route-id="@Model.Id" class="fadeIn fourth" style="background-color: #39ace7; padding: 10px 20px; border-radius: 5px; text-decoration: none; color: white;">Edit</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
