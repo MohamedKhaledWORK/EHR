@@ -1,0 +1,72 @@
+[
+  {
+    "DoctorId": 1,
+    "DayOfWeek": "Monday",
+    "TimeSlot": "09:00 AM"
+  },
+  {
+    "DoctorId": 1,
+    "DayOfWeek": "Wednesday",
+    "TimeSlot": "01:00 PM"
+  },
+  {
+    "DoctorId": 2,
+    "DayOfWeek": "Tuesday",
+    "TimeSlot": "10:00 AM"
+  },
+  {
+    "DoctorId": 2,
+    "DayOfWeek": "Thursday",
+    "TimeSlot": "02:00 PM"
+  },
+  {
+    "DoctorId": 3,
+    "DayOfWeek": "Monday",
+    "TimeSlot": "09:00 AM"
+  },
+  {
+    "DoctorId": 3,
+    "DayOfWeek": "Friday",
+    "TimeSlot": "03:00 PM"
+  },
+  {
+    "DoctorId": 4,
+    "DayOfWeek": "Wednesday",
+    "TimeSlot": "11:00 AM"
+  },
+  {
+    "DoctorId": 4,
+    "DayOfWeek": "Saturday",
+    "TimeSlot": "08:00 AM"
+  },
+  {
+    "DoctorId": 5,
+    "DayOfWeek": "Tuesday",
+    "TimeSlot": "01:00 PM"
+  },
+  {
+    "DoctorId": 5,
+    "DayOfWeek": "Thursday",
+    "TimeSlot": "09:00 AM"
+  },
+  {
+    "DoctorId": 6,
+    "DayOfWeek": "Friday",
+    "TimeSlot": "02:00 PM"
+  },
+  {
+    "DoctorId": 6,
+    "DayOfWeek": "Saturday",
+    "TimeSlot": "10:00 AM"
+  },
+  {
+    "DoctorId": 7,
+    "DayOfWeek": "Monday",
+    "TimeSlot": "09:00 AM"
+  },
+  {
+    "DoctorId": 7,
+    "DayOfWeek": "Wednesday",
+    "TimeSlot": "03:00 PM"
+  }
+]

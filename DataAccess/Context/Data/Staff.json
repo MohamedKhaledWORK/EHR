@@ -1,0 +1,114 @@
+[
+  {
+  
+    "Name": "Dr. John Doe",
+    "UserName": "johndoe",
+    "Email": "johndoe@example.com",
+    "Password": "password123",
+    "Role": "Doctor"
+  },
+  {
+    
+    "Name": "Dr. Jane Roe",
+    "UserName": "janeroe",
+    "Email": "janeroe@example.com",
+    "Password": "password123",
+    "Role": "Doctor"
+  },
+  {
+    
+    "Name": "Dr. Sam Smith",
+    "UserName": "samsmith",
+    "Email": "samsmith@example.com",
+    "Password": "password123",
+    "Role": "Doctor"
+  },
+  {
+    
+    "Name": "Dr. Laura Brown",
+    "UserName": "laurabrown",
+    "Email": "laurabrown@example.com",
+    "Password": "password123",
+    "Role": "Doctor"
+  },
+  {
+   
+    "Name": "Dr. Alice Green",
+    "UserName": "alicegreen",
+    "Email": "alicegreen@example.com",
+    "Password": "password123",
+    "Role": "Doctor"
+  },
+  {
+   
+    "Name": "Dr. Robert White",
+    "UserName": "robertwhite",
+    "Email": "robertwhite@example.com",
+    "Password": "password123",
+    "Role": "Doctor"
+  },
+  {
+   
+    "Name": "Dr. Karen Black",
+    "UserName": "karenblack",
+    "Email": "karenblack@example.com",
+    "Password": "password123",
+    "Role": "Doctor"
+  },
+  {
+  
+    "Name": "Admin Adam",
+    "UserName": "adminadam",
+    "Email": "adminadam@example.com",
+    "Password": "admin123",
+    "Role": "Admin"
+  },
+  {
+   
+    "Name": "Receptionist Rachel",
+    "UserName": "rachelreception",
+    "Email": "rachel@example.com",
+    "Password": "password123",
+    "Role": "Receptionist"
+  },
+  {
+    
+    "Name": "Receptionist Ryan",
+    "UserName": "ryanreception",
+    "Email": "ryan@example.com",
+    "Password": "password123",
+    "Role": "Receptionist"
+  },
+  {
+    
+    "Name": "Receptionist Riley",
+    "UserName": "rileyreception",
+    "Email": "riley@example.com",
+    "Password": "password123",
+    "Role": "Receptionist"
+  },
+  {
+    
+    "Name": "Lab Tech Larry",
+    "UserName": "larrylab",
+    "Email": "larry@example.com",
+    "Password": "password123",
+    "Role": "Laboratory"
+  },
+  {
+    
+    "Name": "Lab Tech Lisa",
+    "UserName": "lisalab",
+    "Email": "lisa@example.com",
+    "Password": "password123",
+    "Role": "Laboratory"
+  },
+  {
+  
+    "Name": "Lab Tech Luke",
+    "UserName": "lukelab",
+    "Email": "luke@example.com",
+    "Password": "password123",
+    "Role": "Laboratory"
+  }
+]

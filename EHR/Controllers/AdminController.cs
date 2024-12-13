@@ -59,7 +59,7 @@ namespace EHR.Controllers
 
         public async Task<IActionResult> ShowAvailableTime(int id) 
         {
-            var doctor = _doctorRepository.GetByIdAsync(id);
+            var doctor =await _doctorRepository.GetByIdAsync(id);
             ViewBag.doctor = doctor;
             var DoctorTime =await _timeRepository.GetAllById(id);
             return View(DoctorTime);

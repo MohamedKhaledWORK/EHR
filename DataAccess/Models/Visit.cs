@@ -10,8 +10,11 @@ namespace DataAccess.Models
     public class Visit
     {
         public int Id { get; set; }
+        [ForeignKey(nameof(Patient))]
         public int PatientId { get; set; }
         public Patient Patient { get; set; }
+        [ForeignKey(nameof(Doctors))]
+        public int DoctorId { get; set; }
         public Doctors Doctor { get; set; }
         public string Date {  get; set; }
         public string? Diagnosis {  get; set; }

@@ -1,0 +1,34 @@
+[
+  {
+    "PatientId": 1,
+    "LabTestType": "Blood Test",
+    "TestDate": "2024-12-12",
+    "TestResult": "Normal",
+    "NormalRange": "4.5-11",
+    "TestStatus": "Completed"
+  },
+  {
+    "PatientId": 2,
+    "LabTestType": "X-Ray",
+    "TestDate": "2024-12-13",
+    "TestResult": "No fractures",
+    "NormalRange": "N/A",
+    "TestStatus": "Completed"
+  },
+  {
+    "PatientId": 3,
+    "LabTestType": "Urine Test",
+    "TestDate": "2024-12-14",
+    "TestResult": "Glucose detected",
+    "NormalRange": "0-10",
+    "TestStatus": "Completed"
+  },
+  {
+    "PatientId": 4,
+    "LabTestType": "MRI",
+    "TestDate": "2024-12-15",
+    "TestResult": "No abnormalities",
+    "NormalRange": "N/A",
+    "TestStatus": "Completed"
+  }
+]

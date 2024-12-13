@@ -45,7 +45,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("DoctorAvailabilities");
+                    b.ToTable("DoctorAvailabilities", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Models.Doctors", b =>
@@ -75,7 +75,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("StaffId");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("Doctors", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Models.Lab", b =>
@@ -110,7 +110,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("LabTests");
+                    b.ToTable("LabTests", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Models.MedicationPrescription", b =>
@@ -155,7 +155,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("MedicationPrescriptions");
+                    b.ToTable("MedicationPrescriptions", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Models.Patient", b =>
@@ -213,7 +213,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Models.Staff", b =>
@@ -245,7 +245,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Staff");
+                    b.ToTable("Staff", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Models.Visit", b =>
@@ -289,7 +289,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Visits");
+                    b.ToTable("Visits", (string)null);
                 });
 
             modelBuilder.Entity("DataAccess.Models.DoctorAvailability", b =>

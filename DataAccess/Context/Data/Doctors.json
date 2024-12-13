@@ -1,0 +1,51 @@
+
+  [
+    {
+    
+      "Specialty": "Cardiology",
+      "Phone": "123-456-7890",
+      "OfficeAddress": "123 Heart St",
+      "StaffId": 1
+    },
+    {
+ 
+      "Specialty": "Neurology",
+      "Phone": "456-789-0123",
+      "OfficeAddress": "456 Brain Blvd",
+      "StaffId": 2
+    },
+    {
+     
+      "Specialty": "Pediatrics",
+      "Phone": "789-012-3456",
+      "OfficeAddress": "789 Kid Ln",
+      "StaffId": 3
+    },
+    {
+    
+      "Specialty": "Dermatology",
+      "Phone": "012-345-6789",
+      "OfficeAddress": "012 Skin Ave",
+      "StaffId": 4
+    },
+    {
+      "Specialty": "Orthopedics",
+      "Phone": "234-567-8901",
+      "OfficeAddress": "234 Bone Rd",
+      "StaffId": 5
+    },
+    {
+  
+      "Specialty": "Oncology",
+      "Phone": "345-678-9012",
+      "OfficeAddress": "345 Cancer Dr",
+      "StaffId": 6
+    },
+    {
+  
+      "Specialty": "Psychiatry",
+      "Phone": "456-789-0123",
+      "OfficeAddress": "456 Mind St",
+      "StaffId": 7
+    }
+]

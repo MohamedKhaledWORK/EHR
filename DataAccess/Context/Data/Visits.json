@@ -1,0 +1,67 @@
+[
+  {
+    "PatientId": 1,
+    "DoctorId": 1,
+    "Date": "Monday - 09:00 AM",
+    "Diagnosis": "Mild hypertension",
+    "TreatmentPlan": "Prescribed daily exercise and low-sodium diet",
+    "ReasonForVisit": "Chest pain",
+    "VisitType": "Initial"
+  },
+  {
+    "PatientId": 2,
+    "DoctorId": 2,
+    "Date": "Tuesday - 10:00 AM",
+    "Diagnosis": "Asthma exacerbation",
+
+    "TreatmentPlan": "Inhaler prescribed, avoid allergens",
+    "ReasonForVisit": "Shortness of breath",
+    "VisitType": "Follow-up"
+  },
+  {
+    "PatientId": 3,
+    "DoctorId": 3,
+    "Date": "Friday - 03:00 PM",
+    "Diagnosis": null,
+ 
+    "TreatmentPlan": null,
+    "ReasonForVisit": "Routine check-up",
+    "VisitType": "Routine"
+  },
+  {
+    "PatientId": 4,
+    "DoctorId": 4,
+    "Date": "Wednesday - 11:00 AM",
+    "Diagnosis": "Arthritis",
+    "TreatmentPlan": "Prescribed anti-inflammatory medication",
+    "ReasonForVisit": "Joint pain",
+    "VisitType": "Initial"
+  },
+  {
+    "PatientId": 5,
+    "DoctorId": 5,
+    "Date": "Tuesday - 01:00 PM",
+    "Diagnosis": null,
+    "TreatmentPlan": null,
+    "ReasonForVisit": "Health check",
+    "VisitType": "Routine"
+  },
+  {
+    "PatientId": 1,
+    "DoctorId": 6,
+    "Date": "Friday - 02:00 PM",
+    "Diagnosis": null,
+    "TreatmentPlan": null,
+    "ReasonForVisit": "Cancer screening",
+    "VisitType": "Initial"
+  },
+  {
+    "PatientId": 2,
+    "DoctorId": 7,
+    "Date": "Monday - 09:00 AM",
+    "Diagnosis": "Stress-related hypertension",
+    "TreatmentPlan": "Recommended stress management techniques",
+    "ReasonForVisit": "Stress",
+    "VisitType": "Initial"
+  }
+]

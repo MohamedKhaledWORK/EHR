@@ -45,7 +45,8 @@ namespace EHR
             try
             {
               var dbContext = Services.GetRequiredService<EHRdbContext>();
-              await dbContext.Database.MigrateAsync();
+                await dbContext.Database.MigrateAsync();
+                await EHRDataSeed.SeedAsync(dbContext);
             }
             catch (Exception ex) 
             {

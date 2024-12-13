@@ -1,0 +1,77 @@
+[
+  {
+ 
+    "Name": "Jane Smith",
+    "Username": "janesmith",
+    "Password": "mypassword",
+    "Email": "janesmith@example.com",
+    "Age": 35,
+    "Gender": "Female",
+    "Phone": "987-654-3210",
+    "Address": "456 Wellness Blvd",
+    "MedicalHistory": "Hypertension",
+    "BloodType": "O+",
+    "EmergencyContact": "John Smith - 111-222-3333",
+    "HasInsurance": true
+  },
+  {
+   
+    "Name": "John Doe",
+    "Username": "johndoe123",
+    "Password": "mypassword",
+    "Email": "johndoe123@example.com",
+    "Age": 40,
+    "Gender": "Male",
+    "Phone": "123-456-7890",
+    "Address": "789 Main St",
+    "MedicalHistory": "Asthma",
+    "BloodType": "A-",
+    "EmergencyContact": "Jane Doe - 222-333-4444",
+    "HasInsurance": true
+  },
+  {
+   
+    "Name": "Emily Clark",
+    "Username": "emilyclark",
+    "Password": "mypassword",
+    "Email": "emily@example.com",
+    "Age": 50,
+    "Gender": "Female",
+    "Phone": "654-321-0987",
+    "Address": "123 Elm St",
+    "MedicalHistory": "Diabetes",
+    "BloodType": "B+",
+    "EmergencyContact": "Michael Clark - 555-666-7777",
+    "HasInsurance": false
+  },
+  {
+    
+    "Name": "Michael Brown",
+    "Username": "michaelbrown",
+    "Password": "mypassword",
+    "Email": "michael@example.com",
+    "Age": 60,
+    "Gender": "Male",
+    "Phone": "321-654-9870",
+    "Address": "456 Oak Ave",
+    "MedicalHistory": "Arthritis",
+    "BloodType": "AB-",
+    "EmergencyContact": "Sarah Brown - 888-999-0000",
+    "HasInsurance": true
+  },
+  {
+
+    "Name": "Sarah White",
+    "Username": "sarahwhite",
+    "Password": "mypassword",
+    "Email": "sarah@example.com",
+    "Age": 25,
+    "Gender": "Female",
+    "Phone": "111-222-3333",
+    "Address": "789 Pine Rd",
+    "MedicalHistory": "None",
+    "BloodType": "O-",
+    "EmergencyContact": "Tom White - 444-555-6666",
+    "HasInsurance": false
+  }
+]

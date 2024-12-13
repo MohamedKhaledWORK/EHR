@@ -11,6 +11,7 @@ namespace DataAccess.Models
     public class Doctors
     {
         public int Id { get; set; } 
+        public int StaffId { get; set; }
         public Staff Staff { get; set; }
         [Required(ErrorMessage = "Specialty is Required")]
         public string Specialty { get; set; }

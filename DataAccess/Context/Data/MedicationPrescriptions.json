@@ -1,0 +1,79 @@
+[
+  {
+    
+    "VisitId": 1,
+    "PatientId": 1,
+    "DoctorId": 1,
+    "MedicationName": "Aspirin",
+    "Dosage": "75 mg",
+    "FreqPerDay": 1,
+    "Duration": "30 days",
+    "Comments": "Take after meals"
+  },
+  {
+  
+    "VisitId": 2,
+    "PatientId": 2,
+    "DoctorId": 2,
+    "MedicationName": "Albuterol",
+    "Dosage": "90 mcg",
+    "FreqPerDay": 2,
+    "Duration": "15 days",
+    "Comments": "Use inhaler as needed"
+  },
+  {
+  
+    "VisitId": 3,
+    "PatientId": 3,
+    "DoctorId": 3,
+    "MedicationName": "Metformin",
+    "Dosage": "500 mg",
+    "FreqPerDay": 2,
+    "Duration": "60 days",
+    "Comments": "Take with meals"
+  },
+  {
+    
+    "VisitId": 4,
+    "PatientId": 4,
+    "DoctorId": 4,
+    "MedicationName": "Ibuprofen",
+    "Dosage": "200 mg",
+    "FreqPerDay": 3,
+    "Duration": "7 days",
+    "Comments": "Take after meals"
+  },
+  {
+   
+    "VisitId": 5,
+    "PatientId": 5,
+    "DoctorId": 5,
+    "MedicationName": "Vitamin D",
+    "Dosage": "1000 IU",
+    "FreqPerDay": 1,
+    "Duration": "90 days",
+    "Comments": "Take in the morning"
+  },
+  {
+   
+    "VisitId": 6,
+    "PatientId": 1,
+    "DoctorId": 6,
+    "MedicationName": "Omeprazole",
+    "Dosage": "20 mg",
+    "FreqPerDay": 1,
+    "Duration": "14 days",
+    "Comments": "Take before breakfast"
+  },
+  {
+ 
+    "VisitId": 7,
+    "PatientId": 2,
+    "DoctorId": 7,
+    "MedicationName": "Sertraline",
+    "Dosage": "50 mg",
+    "FreqPerDay": 1,
+    "Duration": "30 days",
+    "Comments": "Take at bedtime"
+  }
+]
