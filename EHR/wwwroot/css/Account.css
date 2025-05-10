@@ -93,10 +93,10 @@ h4 {
     width: 95%; /* Adjust for wider layout */
     max-width: 1200px; /* Set a new max-width */
     position: relative;
-    padding: 0px;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
     box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
     text-align: center;
+    padding: 30px;
 }
 /* TABS */
 
@@ -149,7 +149,7 @@ input[type=button], input[type=submit], input[type=reset] {
 
 input[type=text],
 input[type=password],
-input[type=number] {
+input[type=number] ,input[type=email]{
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -174,12 +174,12 @@ input[type=number] {
 }
 
 
-    input[type=text]:focus, input[type=password]:focus, input[type=number] :focus {
+    input[type=text]:focus, input[type=password]:focus, input[type=number] :focus ,input[type=email] :focus{
         background-color: #fff;
         border-bottom: 2px solid #5fbae9;
     }
 
-    input[type=text]:placeholder, input[type=password]:placeholder, input[type=number] :placeholder {
+    input[type=text]:placeholder, input[type=password]:placeholder, input[type=number] :placeholder ,input[type=email]::placeholder {
         color: #cccccc;
     }
 

@@ -5,6 +5,7 @@ using DataAccess.Models;
 using EHR.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Numerics;
+using System.Text.RegularExpressions;
 
 namespace EHR.Controllers
 {
@@ -22,44 +23,67 @@ namespace EHR.Controllers
             _labtestRepository = labtestRepository;
             _mapper = mapper;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? message = null)
         {
             var Staffid= HttpContext.Session.GetInt32("StaffId");
             var Laboratory=await _staffRepository.GetByIdAsync(Staffid.Value);
             var mapped= _mapper.Map<Staff,StaffViewModel>(Laboratory);
+            ViewBag.Message = message;
             return View(mapped);
         }
-        public async Task<IActionResult> Edit()
+        [HttpGet]
+        public async Task<IActionResult> Edit(int Id = 0 ,string? message = null)
         {
-            var Staffid = HttpContext.Session.GetInt32("StaffId");
-            var Laboratory = await _staffRepository.GetByIdAsync(Staffid.Value);
-            return View(Laboratory);
+            if (Id == 0) 
+            {
+                var Staffid = HttpContext.Session.GetInt32("StaffId");
+                var Laboratory = await _staffRepository.GetByIdAsync(Staffid.Value);
+                ViewBag.Message = message;
+                return View(Laboratory);
+            }
+            else
+            {
+                var Laboratory = await _staffRepository.GetByIdAsync(Id);
+                ViewBag.Message = message;
+                return View(Laboratory);
+            }
         }
         [HttpPost]
         public async Task<IActionResult> Edit(Staff model)
         {
             if (ModelState.IsValid) 
             {
-                 _staffRepository.Update(model);
-                int Result = await _staffRepository.CompleteAsync();
-                if (Result > 0)
+                var Id = HttpContext.Session.GetInt32("StaffId");
+                if (Regex.IsMatch(model.UserName, @"^[a-zA-Z0-9\s]+$"))
                 {
-                    return RedirectToAction(nameof(Index));
+                    _staffRepository.Update(model);
+                    int Result = await _staffRepository.CompleteAsync();
+                    if (Result > 0)
+                    {
+                        return RedirectToAction(nameof(Index), new { message = "your data is Updated successfuly" });
+                    }
                 }
+                else
+                {
+                    return RedirectToAction(nameof(Edit), new { Id = model.Id, message = "user name should be only letters" });
+                }
+
             }
-            return View(model);
+            return RedirectToAction(nameof(Edit), new { Id = model.Id, message = "Update Failed,please fill the from" });
         }
-        public async Task<IActionResult> LabTests()
+        public async Task<IActionResult> LabTests(string? message = null)
         {
             var labtests=await _labtestRepository.GetAllAsync();
             var mapped = _mapper.Map<IEnumerable<Lab>, IEnumerable<LabViewModel>>(labtests);
+            ViewBag.Message = message;
             return View(mapped);
         }
-        public async Task<IActionResult> EditTest(int id) 
+        public async Task<IActionResult> EditTest(int id,string? message = null) 
         {
             var labtest =await _labtestRepository.GetByIdAsync(id);
             var mapped = _mapper.Map<Lab, SimpleLabViewModel>(labtest);
             mapped.PatientUserName =labtest.Patient.Username;
+            ViewBag.Message = message;
             return View(mapped);
         }
         [HttpPost]
@@ -77,18 +101,15 @@ namespace EHR.Controllers
                     int Result = await _labtestRepository.CompleteAsync();
                     if (Result > 0)
                     {
-                        return RedirectToAction(nameof(LabTests));
+                        return RedirectToAction(nameof(LabTests), new { message = "Updated successfuly"});
                     }
                 }
             }
             else
             {
-                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    Console.WriteLine($"Validation Error: {error.ErrorMessage}");
-                }
+                return RedirectToAction(nameof(EditTest), new { id = model.Id, message = "Update Failed,please fill the from" });
             }
-            return View(model);
+            return RedirectToAction(nameof(EditTest), new { id = model.Id, message = "Update Failed,please fill the from" });
         }
         public IActionResult Logout()
         {

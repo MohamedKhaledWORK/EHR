@@ -5,6 +5,8 @@ using EHR.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Numerics;
+using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace EHR.Controllers
 {
@@ -35,8 +37,9 @@ namespace EHR.Controllers
             return View(mappedDoctors);
         }
 
-        public IActionResult AddDoctors()
+        public IActionResult AddDoctors(string? message = null)
         {
+            ViewBag.Message = message;
             return View();
         }
         [HttpPost]
@@ -44,14 +47,27 @@ namespace EHR.Controllers
         {
             if (ModelState.IsValid)
             {
-                 await _doctorRepository.AddAsync(doctor);
-                int Result = await _doctorRepository.CompleteAsync();
-                if (Result > 0)
+                var User = await _userRepository.GetByUserNameAsync(doctor.Staff.UserName);
+                if (User != null)
                 {
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("AddDoctors" , new { message = "user name already exist be human okkkkay?"});
                 }
+                if (Regex.IsMatch(doctor.Staff.Name, @"^[a-zA-Z\s]+$") && Regex.IsMatch(doctor.Staff.UserName, @"^[a-zA-Z0-9\s]+$"))
+                {
+                    await _doctorRepository.AddAsync(doctor);
+                    int Result = await _doctorRepository.CompleteAsync();
+                    if (Result > 0)
+                    {
+                        return RedirectToAction(nameof(Index));
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("AddDoctors", new { message = "There is a special character in user name or name of staff" });
+                }
+                
             }
-            return View(doctor);
+            return RedirectToAction("AddDoctors", new { message = "please fill the form pleasse" });
         }
 
 
@@ -64,23 +80,35 @@ namespace EHR.Controllers
             var DoctorTime =await _timeRepository.GetAllById(id);
             return View(DoctorTime);
         }
-        public async Task<IActionResult> AvailableTime(int id)
+        public async Task<IActionResult> AvailableTime(int id, string? message = null)
         {
             var doctor = await _doctorRepository.GetByIdAsync(id);
             ViewBag.doctor = doctor;
+            ViewBag.Message = message;
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> AvailableTime(TimeViewModel model)
         {
+            var staff = await _staffRepository.GetByUserNameAsync(model.DoctorUserName);
+            var doc = await _doctorRepository.GetDoctorByStaffID(staff.Id);
             if (ModelState.IsValid) 
             {
-                var staff = await _staffRepository.GetByUserNameAsync(model.DoctorUserName);
-                var doc = await _doctorRepository.GetDoctorByStaffID(staff.Id);
                 var map =_mapper.Map<TimeViewModel,DoctorAvailability>(model);
                 map.Doctor = doc;
                 map.DoctorId = doc.Id;
-               await _timeRepository.AddAsync(map);
+                var availableTime = await _timeRepository.GetAllById(doc.Id);
+                if (availableTime != null)
+                {
+                    foreach (var time in availableTime)
+                    {
+                        if (time.TimeSlot == model.TimeSlot && time.DayOfWeek == model.DayOfWeek)
+                        {
+                            return RedirectToAction("AvailableTime", new { id = doc.Id, message = "This time is already exist" });
+                        }
+                    }
+                }
+                await _timeRepository.AddAsync(map);
                 int Result = await _timeRepository.CompleteAsync();
                 if (Result > 0) 
                 {
@@ -90,7 +118,7 @@ namespace EHR.Controllers
                 ViewBag.doctor = doctor;
             }
            
-            return View(model);
+            return RedirectToAction("AvailableTime", new { id = doc.Id , message = "please be a human and fill the form"});
         }
 
 
@@ -100,8 +128,9 @@ namespace EHR.Controllers
             var Staff = await _staffRepository.GetAllAsync();
             return View(Staff);
         }
-        public IActionResult AddStaff()
+        public IActionResult AddStaff(string? message = null)
         {
+            ViewBag.Message = message;
             return View();
         }
         [HttpPost]
@@ -113,11 +142,18 @@ namespace EHR.Controllers
                 var User = await _userRepository.GetByUserNameAsync(staff.UserName);
                 if (User is null)
                 {
-                    await _staffRepository.AddAsync(staff);
-                    int Result = await _staffRepository.CompleteAsync();
-                    if (Result > 0)
+                    if (Regex.IsMatch(staff.Name, @"^[a-zA-Z\s]+$")&& Regex.IsMatch(staff.UserName, @"^[a-zA-Z0-9\s]+$"))
                     {
-                        return RedirectToAction(nameof(Staff));
+                        await _staffRepository.AddAsync(staff);
+                        int Result = await _staffRepository.CompleteAsync();
+                        if (Result > 0)
+                        {
+                            return RedirectToAction(nameof(Staff));
+                        }
+                    }
+                    else
+                    {
+                        return RedirectToAction("AddStaff", new { message = "There is a special character in user name or name of staff" });
                     }
                 }
                 else

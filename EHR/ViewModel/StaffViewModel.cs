@@ -10,7 +10,9 @@ namespace EHR.ViewModel
         [Required(ErrorMessage = "UserName is Required")]
         public string UserName { get; set; }
         [Required(ErrorMessage = "Email is Required")]
+        [EmailAddress]
         public string Email { get; set; }
+        [Required]
 
         public string Role { get; set; }
     }
