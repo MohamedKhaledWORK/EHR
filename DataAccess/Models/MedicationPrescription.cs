@@ -21,7 +21,7 @@ namespace DataAccess.Models
         public string Dosage { get; set; }
         public int FreqPerDay { get; set; }
         public string Duration {  get; set; }
-        public string Comments {  get; set; }
+        public string? Comments {  get; set; }
 
     }
 }

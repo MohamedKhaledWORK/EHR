@@ -15,8 +15,10 @@ namespace DataAccess.Models
         public Staff Staff { get; set; }
         [Required(ErrorMessage = "Specialty is Required")]
         public string Specialty { get; set; }
-        [Required(ErrorMessage = "Phone is Required")]
+        [Required(ErrorMessage = "Phone number is required.")]
+        [RegularExpression(@"^\d{11}$", ErrorMessage = "Phone number must be 11 digits.")]
         public string Phone { get; set; }
+        
         [Required(ErrorMessage = "OfficeAddress is Required")]
         public string OfficeAddress { get; set; }
         public ICollection<DoctorAvailability> Availabilities { get; set; }= new HashSet<DoctorAvailability>();

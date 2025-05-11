@@ -108,9 +108,8 @@ namespace EHR.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Doctors model)
         {
-            if (Regex.IsMatch(model.Staff.Name, @"^[a-zA-Z\s]+$") && Regex.IsMatch(model.Staff.UserName, @"^[a-zA-Z0-9\s]+$"))
-            {
-                var ExistingDoctor = _dbContext.Doctors.Include(D => D.Staff).FirstOrDefault(D => D.Id == model.Id);
+         if (!ModelState.IsValid) return View(model);
+            var ExistingDoctor = _dbContext.Doctors.Include(D => D.Staff).FirstOrDefault(D => D.Id == model.Id);
                 if (ExistingDoctor is not null)
                 {
                     ExistingDoctor.Staff.Name = model.Staff.Name;
@@ -136,19 +135,21 @@ namespace EHR.Controllers
                 {
                     return RedirectToAction("Edit", new { message = "this Doctor not found" });
                 }
-
-            }
-            else
-            {
-                return RedirectToAction("Edit", new { message = "don't use special chars in user name and user just letters in your name" });
-            }
+ 
         }
 
         public async Task<IActionResult> Visits(string Search)
         {
+
             if (Search is not null)
             {
-                var visits= await _visitRepository.GetAlltoPatientName(Search);
+                ViewBag.Message = "No Visits for this Patient or Patient Not Found";
+
+                var visits = await _visitRepository.GetAlltoPatientName(Search);
+                if (visits == null) 
+                {
+                    return RedirectToAction("Visits");
+                }
                 var mapped = _mapper.Map<IEnumerable<Visit>, IEnumerable<VisitViewModel>>(visits);
                 return View(mapped);
             }

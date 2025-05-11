@@ -10,7 +10,7 @@ namespace DataAccess.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Name is required.")]
-        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Name must contain letters only.")]
+        [RegularExpression(@"^[a-zA-Z\s\.]+$", ErrorMessage = "Name can contain letters and spaces only.")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Username is required.")]
