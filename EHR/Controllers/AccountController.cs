@@ -1,8 +1,11 @@
 ﻿using BusinessLogic.Interfaces;
+using BusinessLogic.Repository;
 using DataAccess.Models;
 using EHR.Helper;
 using EHR.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using System.Numerics;
+using System.Text.RegularExpressions;
 
 namespace EHR.Controllers
 {
@@ -25,8 +28,9 @@ namespace EHR.Controllers
         {
             return View();
         }
-        public IActionResult NewUser()
+        public IActionResult NewUser(string? message)
         {
+            ViewBag.Message = message;
             return View();
         }
         [HttpPost]
@@ -34,28 +38,34 @@ namespace EHR.Controllers
         {
             if (ModelState.IsValid) 
             {
-               var User = await _userRepository.GetByUserNameAsync(model.UserName);
-                if (User is not null)
+                if (Regex.IsMatch(model.UserName, @"^[a-zA-Z0-9\s]+$"))
                 {
-                    if (User.Password is null)
+                    var User = await _userRepository.GetByUserNameAsync(model.UserName);
+                    if (User is not null)
                     {
-                        User.Password = model.Password;
-                        _userRepository.Update(User);
-                        int Result = await _userRepository.CompleteAsync();
-                        if (Result > 0)
+                        if (User.Password is null)
                         {
-                            TempData["Message"] = "Welcome! Use ur New Password ";
-                          return  RedirectToAction(nameof(Login));
+                            User.Password = model.Password;
+                            _userRepository.Update(User);
+                            int Result = await _userRepository.CompleteAsync();
+                            if (Result > 0)
+                            {
+                                return RedirectToAction("Login", new { message = "Welcome! Use ur New Password" });
+                            }
+                        }
+                        else
+                        {
+
+                            return RedirectToAction("Login", new { message = "You Already have Password Created" });
                         }
                     }
-                    else 
-                    {
-                        TempData["Message"] = "You Already have Password Created"; 
-                        return RedirectToAction(nameof(Login));
-                    }
+                }
+                else
+                {
+                    return RedirectToAction("NewUser", new { message = "There is a special character in user name" });
                 }
             }
-            return View(model);
+            return RedirectToAction("NewUser", new { message = "Fill the form ya human" });
         }
         public IActionResult NewUserP()
         {
@@ -109,8 +119,9 @@ namespace EHR.Controllers
             return View(patient);
         }
 
-        public IActionResult Login()
+        public IActionResult Login(string? message = null)
         {
+            ViewBag.Message = message;
             return View();
         }
 
@@ -119,30 +130,38 @@ namespace EHR.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _authService.ValidateStaff(model.UserName, model.Password);
-                if (result)
+                if (Regex.IsMatch(model.UserName, @"^[a-zA-Z0-9\s]+$"))
                 {
-                    var userType = await _userRepository.GetByUserNameAsync(model.UserName);
-                    HttpContext.Session.SetInt32("StaffId", userType.Id); 
-                    if (userType is not null)
+                    var result = await _authService.ValidateStaff(model.UserName, model.Password);
+                    if (result)
                     {
-                        var Role = userType.Role;
-                        if (Role == "Doctor")
-                            return RedirectToAction("Index", "Doctor");
-                        else if (Role == "Laboratory")
-                            return RedirectToAction($"Index", "Lab");
-                        else if (Role == "Receptionist")
-                            return RedirectToAction("Index", "Receptionist");
-                        else if (Role == "Admin")
-                            return RedirectToAction("Index", "Admin");
+                        var userType = await _userRepository.GetByUserNameAsync(model.UserName);
+                        HttpContext.Session.SetInt32("StaffId", userType.Id);
+                        if (userType is not null)
+                        {
+                            var Role = userType.Role;
+                            if (Role == "Doctor")
+                                return RedirectToAction("Index", "Doctor");
+                            else if (Role == "Laboratory")
+                                return RedirectToAction($"Index", "Lab");
+                            else if (Role == "Receptionist")
+                                return RedirectToAction("Index", "Receptionist");
+                            else if (Role == "Admin")
+                                return RedirectToAction("Index", "Admin");
+                        }
+                    }
+                    else
+                    {
+                        return RedirectToAction("Login", new { message = "may be user name not exist or you doesn't create a password or the password is wrong" });
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid Username or Password");
+                    return RedirectToAction("Login", new { message = "There is a special character in user name" });
                 }
+
             }
-            return View(model);
+            return RedirectToAction("Login", new { message = "Fill the fooorm" });
         }
         public IActionResult LoginP()
         {

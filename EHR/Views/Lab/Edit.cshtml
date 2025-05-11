@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Staff";
+    var message = ViewBag.Message;
 }
 
 <!DOCTYPE html>
@@ -10,9 +11,44 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/css/account.css" rel="stylesheet" />
     <title>@ViewData["Title"]</title>
+    <style>
+        .message-box {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 10px auto;
+            width: fit-content;
+            transition: opacity 0.5s;
+            opacity: 1;
+            z-index: 9999;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            const messageBox = document.getElementById("message-box");
+            if (messageBox) {
+                setTimeout(() => {
+                    messageBox.style.opacity = "0";
+                    setTimeout(() => messageBox.remove(), 500);
+                }, 5000);
+            }
+        }
+    </script>
 </head>
 <body>
-
+    @if (ViewBag.Message != null)
+    {
+        <div id="message-box" class="message-box">
+            @message
+        </div>
+        ViewBag.Message = null;
+    }
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <div class="fadeIn first">
@@ -20,16 +56,16 @@
                     Edit Personal info
                 </h1>
                 <form asp-action="Edit" method="post">
-                    <input asp-for="Name" class="fadeIn second" placeholder="Name" />
+                    <input asp-for="Name" class="fadeIn second" placeholder="Name" required/>
                     <span asp-validation-for="Name" class="text-danger"></span>
                     <br />
-                    <input asp-for="UserName" class="fadeIn second" placeholder="Username" />
+                    <input asp-for="UserName" class="fadeIn second" placeholder="Username" required/>
                     <span asp-validation-for="UserName" class="text-danger"></span>
                     <br />
-                    <input asp-for="Password" type="password" class="fadeIn second" placeholder="Password" />
+                    <input asp-for="Password" type="password" class="fadeIn second" placeholder="Password" required />
                     <span asp-validation-for="Password" class="text-danger"></span>
                     <br />
-                    <input asp-for="Email" class="fadeIn second" placeholder="Email" />
+                    <input asp-for="Email" class="fadeIn second" placeholder="Email" required/>
                     <span asp-validation-for="Password" class="text-danger"></span>
                     <br />
                     <label asp-for="Role"></label>

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Staff";
+    var message = ViewBag.Message;
 }
 
 <!DOCTYPE html>
@@ -11,7 +12,43 @@
     <link href="~/css/account.css" rel="stylesheet" />
     <title>@ViewData["Title"]</title>
 </head>
+<style>
+    .message-box {
+        position: fixed;
+        top: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #28a745;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 10px auto;
+        width: fit-content;
+        transition: opacity 0.5s;
+        opacity: 1;
+        z-index: 9999;
+    }
+</style>
+<script>
+    window.onload = function () {
+        const messageBox = document.getElementById("message-box");
+        if (messageBox) {
+            setTimeout(() => {
+                messageBox.style.opacity = "0";
+                setTimeout(() => messageBox.remove(), 500);
+            }, 5000);
+        }
+    }
+</script>
 <body>
+    @if (ViewBag.Message != null)
+    {
+        <div id="message-box" class="message-box">
+            @message
+        </div>
+        ViewBag.Message = null;
+    }
     
     <div class="wrapper fadeInDown">
         <div id="formContent">
@@ -26,8 +63,10 @@
                     <input asp-for="UserName" class="fadeIn second" placeholder="Username" />
                     <span asp-validation-for="UserName" class="text-danger"></span>
                     <br />
-                    <input asp-for="Email" class="fadeIn second" placeholder="Email" />
+                    <input type="email" asp-for="Email" class="fadeIn second" placeholder="name@example.com" />
+                    
                     <span asp-validation-for="Email" class="text-danger"></span>
+                    <br/>
                     <select asp-for="Role" class="fadeIn second">
                         <option value="" disabled selected>Choose Role</option>
                         <option value="Laboratory">Laboratory</option>

@@ -1,6 +1,7 @@
 ﻿@model SimpleLabViewModel
 @{
     ViewData["Title"] = "AddResult";
+    var message = ViewBag.Message;
 }
 
 <!DOCTYPE html>
@@ -10,8 +11,44 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/css/account.css" rel="stylesheet" />
     <title>@ViewData["Title"]</title>
+    <style>
+        .message-box {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 10px auto;
+            width: fit-content;
+            transition: opacity 0.5s;
+            opacity: 1;
+            z-index: 9999;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            const messageBox = document.getElementById("message-box");
+            if (messageBox) {
+                setTimeout(() => {
+                    messageBox.style.opacity = "0";
+                    setTimeout(() => messageBox.remove(), 500);
+                }, 5000);
+            }
+        }
+    </script>
 </head>
 <body>
+    <div class="container">
+		@if (message != null)
+		{
+			<div id="message-box" class="message-box">
+				@message
+			</div>
+		}
     <div class="wrapper fadeInDown">
         <div id="formContent">
            
@@ -26,15 +63,15 @@
                     <br />
                     <input asp-for="TestDate" class="fadeIn second" placeholder="TestDate" readonly>
                     <br />
-                    <input asp-for="TestResult" class="fadeIn second" placeholder="TestResult">
+                    <input asp-for="TestResult" class="fadeIn second" placeholder="TestResult" required>
                     <span asp-validation-for="TestResult" class="text-danger"></span>
                     <br />
-                    <input asp-for="NormalRange" class="fadeIn second" placeholder="NormalRange">
+                    <input asp-for="NormalRange" class="fadeIn second" placeholder="NormalRange" required>
                     <span asp-validation-for="NormalRange" class="text-danger"></span>
                     <br />
                     <div class="fadeIn second">
                         <label asp-for="TestStatus">TestStatus:</label>
-                        <select asp-for="TestStatus">
+                        <select asp-for="TestStatus" required>
                             <option value="">Select TestStatus</option>
                             <option value="Pending">Pending</option>
                             <option value="Completed">Completed</option>
