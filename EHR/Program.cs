@@ -71,7 +71,7 @@ namespace EHR
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Account}/{action=login}/{id?}");
+                pattern: "{controller=Account}/{action=intro}/{id?}");
 
             app.Run();
         }

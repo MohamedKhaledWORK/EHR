@@ -14,47 +14,75 @@
 <body>
     <div class="wrapper fadeInDown">
         <div id="formContent">
-            <h1>
-                Edit Personal info
-            </h1>
+            <h1>Edit Personal Info</h1>
             <div class="fadeIn first">
-
                 <form asp-action="Edit" method="post">
-                    <input asp-for="Name" class="fadeIn second" placeholder="Name">
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <!-- Name -->
+                    <div>
+                        <input asp-for="Name" class="fadeIn second" placeholder="Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
                     <br />
-                    <input asp-for="Username" class="fadeIn second" placeholder="Username">
-                    <span asp-validation-for="Username" class="text-danger"></span>
+
+                    <!-- Username -->
+                    <div>
+                        <input asp-for="Username" class="fadeIn second" placeholder="Username" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
                     <br />
-                    <input asp-for="Password" class="fadeIn third" placeholder="Password">
-                    <span asp-validation-for="Password" class="text-danger"></span>
+
+                    <!-- Password -->
+                    <div>
+                        <input asp-for="Password" class="fadeIn third" placeholder="Password" type="password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
                     <br />
-                    <input asp-for="Email" class="fadeIn second" placeholder="Email">
-                    <span asp-validation-for="Email" class="text-danger"></span>
+
+                    <!-- Email -->
+                    <div>
+                        <input asp-for="Email" class="fadeIn second" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
                     <br />
-                    <input asp-for="Age" class="fadeIn second" placeholder="Age">
-                    <span asp-validation-for="Age" class="text-danger"></span>
+
+                    <!-- Age -->
+                    <div>
+                        <input asp-for="Age" class="fadeIn second" placeholder="Age" />
+                        <span asp-validation-for="Age" class="text-danger"></span>
+                    </div>
                     <br />
-                    <div class="fadeIn second">
-                        <label class="col-form-label" asp-for="Gender">Gender:</label>
+
+                    <!-- Gender -->
+                    <div>
+                        <label asp-for="Gender">Gender:</label>
                         <div>
-                            <input asp-for="Gender" type="radio" value="Male" id="Male">
+                            <input asp-for="Gender" type="radio" value="Male" id="Male" />
                             <label for="Male">Male</label>
-                            <input asp-for="Gender" type="radio" value="Female" id="Female">
+                            <input asp-for="Gender" type="radio" value="Female" id="Female" />
                             <label for="Female">Female</label>
                         </div>
                         <span asp-validation-for="Gender" class="text-danger"></span>
                     </div>
                     <br />
-                    <input asp-for="Address" class="fadeIn second" placeholder="Address">
-                    <span asp-validation-for="Address" class="text-danger"></span>
+
+                    <!-- Address -->
+                    <div>
+                        <input asp-for="Address" class="fadeIn second" placeholder="Address" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
                     <br />
-                    <input asp-for="Phone" class="fadeIn second" placeholder="Phone">
-                    <span asp-validation-for="Phone" class="text-danger"></span>
+
+                    <!-- Phone -->
+                    <div>
+                        <input asp-for="Phone" class="fadeIn second" placeholder="Phone" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
                     <br />
-                    <div class="fadeIn second">
+
+                    <!-- Blood Type -->
+                    <div>
                         <label asp-for="BloodType">Blood Type:</label>
-                        <select asp-for="BloodType">
+                        <select asp-for="BloodType" class="fadeIn second">
                             <option value="">Select Blood Type</option>
                             <option value="A+">A+</option>
                             <option value="A-">A-</option>
@@ -68,18 +96,34 @@
                         <span asp-validation-for="BloodType" class="text-danger"></span>
                     </div>
                     <br />
-                    <input asp-for="MedicalHistory" class="fadeIn second" placeholder="MedicalHistory">
-                    <span asp-validation-for="MedicalHistory" class="text-danger"></span>
+
+                    <!-- Medical History -->
+                    <div>
+                        <input asp-for="MedicalHistory" class="fadeIn second" placeholder="Medical History" />
+                        <span asp-validation-for="MedicalHistory" class="text-danger"></span>
+                    </div>
                     <br />
-                    <input asp-for="EmergencyContact" class="fadeIn second" placeholder="EmergencyContact">
-                    <span asp-validation-for="EmergencyContact" class="text-danger"></span>
+
+                    <!-- Emergency Contact -->
+                    <div>
+                        <input asp-for="EmergencyContact" class="fadeIn second" placeholder="Emergency Contact" />
+                        <span asp-validation-for="EmergencyContact" class="text-danger"></span>
+                    </div>
                     <br />
-                    <label class="col-form-label" asp-for="HasInsurance"></label>
-                    <input asp-for="HasInsurance" class="form-control">
-                    <span asp-validation-for="HasInsurance" class="text-danger"></span>
+
+                    <!-- Has Insurance -->
+                    <div>
+                        <label asp-for="HasInsurance">Has Insurance:</label>
+                        <input asp-for="HasInsurance" type="checkbox" />
+                        <span asp-validation-for="HasInsurance" class="text-danger"></span>
+                    </div>
                     <br />
-                    <input type="submit" class="fadeIn fourth" value="Edit">
-                    <a asp-action="Index">Back</a>
+
+                    <!-- Submit Button -->
+                    <div>
+                        <input type="submit" class="fadeIn fourth" value="Edit" />
+                        <a asp-action="Index">Back</a>
+                    </div>
                 </form>
             </div>
         </div>
@@ -91,4 +135,3 @@
     }
 </body>
 </html>
-

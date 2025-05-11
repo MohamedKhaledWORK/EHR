@@ -20,23 +20,6 @@ namespace EHR.Helper
             if ( patient != null)
                 return false; 
 
-            //var patient = new Patient
-            //{
-            //    Name = model.Name,
-            //    Username = model.Username,
-            //    Password = model.Password,
-            //    Email = model.Email,
-            //    Address = model.Address,
-            //    BloodType = model.BloodType,
-            //    Age = model.Age,
-            //    HasInsurance = model.HasInsurance,
-            //    Phone = model.Phone,
-            //    EmergencyContact = model.EmergencyContact,
-            //    MedicalHistory = model.MedicalHistory,
-            //    Gender = model.Gender,
-
-            //};
-
             await _patientRepository.AddAsync(model);
             int Result = await _patientRepository.CompleteAsync();
             if (Result > 0)

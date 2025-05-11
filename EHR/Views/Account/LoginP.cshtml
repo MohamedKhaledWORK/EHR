@@ -16,19 +16,22 @@
         <div id="formContent">
             <h2 class="active">Sign In</h2>
             <a asp-action="Register"><h2 class="inactive underlineHover">Sign Up </h2></a>
-            @if (TempData["Message"] is not null)
+
+            <!-- Display TempData Message -->
+            @if (TempData["ErrorMessage"] is not null)
             {
-                <div id="tempMessage" class="alert alert-success"> @TempData["Message"]</div>
+                <div id="errorMessage" class="alert alert-danger"> @TempData["ErrorMessage"]</div>
             }
+
             <div class="fadeIn first">
                 <div class="button-container">
                     <a asp-action="NewUserP" class="btn-primary">For New User Create Your Password First</a>
                 </div>
                 <form asp-action="LoginP" method="post">
-                    <input asp-for="UserName"  class="fadeIn second"  placeholder="Username">
+                    <input asp-for="UserName" class="fadeIn second" placeholder="Username">
                     <span asp-validation-for="UserName" class="text-danger"></span>
                     <br />
-                    <input asp-for="Password"  class="fadeIn third" placeholder="password">
+                    <input asp-for="Password" class="fadeIn third" placeholder="Password" type="password">
                     <span asp-validation-for="Password" class="text-danger"></span>
                     <br />
                     <input type="submit" class="fadeIn fourth" value="Log In">
@@ -45,7 +48,7 @@
     <script>
         // Show the message if it exists, then hide it after 5 seconds
         window.onload = function () {
-            var messageDiv = document.getElementById('tempMessage');
+            var messageDiv = document.getElementById('errorMessage');
             if (messageDiv) {
                 messageDiv.style.display = 'block'; // Show the message
                 setTimeout(() => messageDiv.style.display = 'none', 7500); // Hide after 5 seconds
@@ -54,4 +57,3 @@
     </script>
 </body>
 </html>
-

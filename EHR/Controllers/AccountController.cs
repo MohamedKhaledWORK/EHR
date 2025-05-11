@@ -153,20 +153,27 @@ namespace EHR.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _authService.ValidatePatient(model.UserName, model.Password);
-                if (result)
+                var userType = await _patientRepository.GetByPatientNameAsync(model.UserName);
+                if (userType == null)
                 {
-                    var userType = await _patientRepository.GetByPatientNameAsync(model.UserName);
-                    HttpContext.Session.SetInt32("PatientId", userType.Id);
-
-                    return RedirectToAction("Index", "Patient");
+                    TempData["ErrorMessage"] = "Username doesn't exist.";
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid Username or Password");
+                    var result = await _authService.ValidatePatient(model.UserName, model.Password);
+                    if (result)
+                    {
+                        HttpContext.Session.SetInt32("PatientId", userType.Id);
+                        return RedirectToAction("Index", "Patient");
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Invalid Username or Password.";
+                    }
                 }
             }
-            return View(model);
+            return RedirectToAction(nameof(LoginP));
         }
+    
     }
 }
