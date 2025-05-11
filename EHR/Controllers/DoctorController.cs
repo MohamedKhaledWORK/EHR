@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace EHR.Controllers
 {
@@ -36,52 +37,70 @@ namespace EHR.Controllers
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? message = null)
         {
             var Staffid = HttpContext.Session.GetInt32("StaffId");
+            ViewBag.Message = message;
             var Doctor = await _doctorRepository.GetDoctorByStaffID(Staffid.Value);
             var mapped = _mapper.Map<Doctors, DoctorViewModel>(Doctor);
             return View(mapped);
         }
         //available time
-        public async Task<IActionResult> ShowAvailableTime(int id)
+        public async Task<IActionResult> ShowAvailableTime(int id,string? message = null)
         {
             var doctor =await _doctorRepository.GetByIdAsync(id);
             ViewBag.doctor = doctor;
-
+            ViewBag.Message = message;
             var DoctorTime = await _timeRepositry.GetAllById(id);
             return View(DoctorTime);
         }
-        public async Task<IActionResult> AvailableTime(int id)
+        public async Task<IActionResult> AvailableTime(int id,string? message = null)
         {
             var doctor = await _doctorRepository.GetByIdAsync(id);
             ViewBag.doctor = doctor;
+            ViewBag.Message = message;
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> AvailableTime(TimeViewModel model)
         {
+            var staff = await _userRepository.GetByUserNameAsync(model.DoctorUserName);
+            var doc = await _doctorRepository.GetDoctorByStaffID(staff.Id);
             if (ModelState.IsValid)
             {
-                var staff = await _userRepository.GetByUserNameAsync(model.DoctorUserName);
-                var doc = await _doctorRepository.GetDoctorByStaffID(staff.Id);
                 var map = _mapper.Map<TimeViewModel, DoctorAvailability>(model);
                 map.Doctor = doc;
                 map.DoctorId = doc.Id;
+                var availableTime = await _timeRepositry.GetAllById(doc.Id);
+                if (availableTime != null)
+                {
+                    foreach (var time in availableTime)
+                    {
+                        if (time.TimeSlot == model.TimeSlot && time.DayOfWeek == model.DayOfWeek)
+                        {
+                            return RedirectToAction("AvailableTime", new { id = doc.Id, message = "This time is already exist" });
+                        }
+                    }
+                }
                 await _timeRepositry.AddAsync(map);
                 int Result = await _timeRepositry.CompleteAsync();
                 if (Result > 0)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ShowAvailableTime", new { id = doc.Id, message = "new time added successfuly" });
+                }
+                else
+                {
+                    RedirectToAction("AvailableTime", new { id = doc.Id, message = "Field update your data" });
                 }
                 var doctor = await _doctorRepository.GetByIdAsync(doc.Id);
                 ViewBag.doctor = doctor;
             }
 
-            return View(model);
+            return RedirectToAction("AvailableTime",new { id = doc.Id , message = "Fill the form please"});
         }
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> Edit(string? message = null)
         {
+            ViewBag.Message = message;
             var Staffid = HttpContext.Session.GetInt32("StaffId");
             var doctor = await _doctorRepository.GetDoctorByStaffID(Staffid.Value);
             return View(doctor);
@@ -89,7 +108,7 @@ namespace EHR.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Doctors model)
         {
-            if (ModelState.IsValid)
+            if (Regex.IsMatch(model.Staff.Name, @"^[a-zA-Z\s]+$") && Regex.IsMatch(model.Staff.UserName, @"^[a-zA-Z0-9\s]+$"))
             {
                 var ExistingDoctor = _dbContext.Doctors.Include(D => D.Staff).FirstOrDefault(D => D.Id == model.Id);
                 if (ExistingDoctor is not null)
@@ -105,12 +124,24 @@ namespace EHR.Controllers
                     int Result = await _doctorRepository.CompleteAsync();
                     if (Result > 0)
                     {
-                        return RedirectToAction(nameof(Index));
+                        return RedirectToAction(nameof(Index),new { message = "your data edit successfuly"});
+                    }
+                    else
+                    {
+                        return RedirectToAction("Edit", new { message = "Field update your data" });
                     }
 
                 }
+                else
+                {
+                    return RedirectToAction("Edit", new { message = "this Doctor not found" });
+                }
+
             }
-            return View(model);
+            else
+            {
+                return RedirectToAction("Edit", new { message = "don't use special chars in user name and user just letters in your name" });
+            }
         }
 
         public async Task<IActionResult> Visits(string Search)

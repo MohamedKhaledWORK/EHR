@@ -59,6 +59,10 @@ namespace EHR.Controllers
                             return RedirectToAction("Login", new { message = "You Already have Password Created" });
                         }
                     }
+                    else 
+                    {
+                        RedirectToAction("NewUser", new { message = "Username not exist." });
+                    }
                 }
                 else
                 {

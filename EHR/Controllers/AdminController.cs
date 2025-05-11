@@ -30,8 +30,9 @@ namespace EHR.Controllers
             _userRepository = userRepository;
             _mapper = mapper;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? message = null)
         {
+            ViewBag.Message = message;
             var Doctors= await _doctorRepository.GetAllAsync();
             var mappedDoctors = _mapper.Map<IEnumerable<Doctors>, IEnumerable<DoctorViewModel>>(Doctors);
             return View(mappedDoctors);
@@ -45,29 +46,29 @@ namespace EHR.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDoctors(Doctors doctor)
         {
-            if (ModelState.IsValid)
+            
+            var User = await _userRepository.GetByUserNameAsync(doctor.Staff.UserName);
+            if (User != null)
             {
-                var User = await _userRepository.GetByUserNameAsync(doctor.Staff.UserName);
-                if (User != null)
+                return RedirectToAction("AddDoctors" , new { message = "user name already exist be human okkkkay?"});
+            }
+            if (Regex.IsMatch(doctor.Staff.Name, @"^[a-zA-Z\s]+$") && Regex.IsMatch(doctor.Staff.UserName, @"^[a-zA-Z0-9\s]+$"))
+            {
+                await _doctorRepository.AddAsync(doctor);
+                int Result = await _doctorRepository.CompleteAsync();
+                if (Result > 0)
                 {
-                    return RedirectToAction("AddDoctors" , new { message = "user name already exist be human okkkkay?"});
-                }
-                if (Regex.IsMatch(doctor.Staff.Name, @"^[a-zA-Z\s]+$") && Regex.IsMatch(doctor.Staff.UserName, @"^[a-zA-Z0-9\s]+$"))
-                {
-                    await _doctorRepository.AddAsync(doctor);
-                    int Result = await _doctorRepository.CompleteAsync();
-                    if (Result > 0)
-                    {
-                        return RedirectToAction(nameof(Index));
-                    }
+                    return RedirectToAction(nameof(Index), new { message = $"Dr.{doctor.Staff.Name} added successfuly"});
                 }
                 else
                 {
-                    return RedirectToAction("AddDoctors", new { message = "There is a special character in user name or name of staff" });
+                    return RedirectToAction("AddDoctors", new { message = "There is a problem in adding doctor" });
                 }
-                
             }
-            return RedirectToAction("AddDoctors", new { message = "please fill the form pleasse" });
+            else
+            {
+                return RedirectToAction("AddDoctors", new { message = "There is a special character in user name or name of staff" });
+            }
         }
 
 
@@ -112,7 +113,7 @@ namespace EHR.Controllers
                 int Result = await _timeRepository.CompleteAsync();
                 if (Result > 0) 
                 {
-                   return RedirectToAction("Index");
+                   return RedirectToAction("Index", new { message = $"new time added successfuly for dr.{doc.Staff.Name}"});
                 }
                 var doctor = await _doctorRepository.GetByIdAsync(doc.Id);
                 ViewBag.doctor = doctor;

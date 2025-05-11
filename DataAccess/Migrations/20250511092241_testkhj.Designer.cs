@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(EHRdbContext))]
-    [Migration("20250511080225_empty")]
-    partial class empty
+    [Migration("20250511092241_testkhj")]
+    partial class testkhj
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

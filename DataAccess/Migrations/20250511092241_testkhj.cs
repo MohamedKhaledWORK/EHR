@@ -4,7 +4,7 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class empty : Migration
+    public partial class testkhj : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace DataAccess.Migrations
                 table: "Staff",
                 type: "nvarchar(100)",
                 maxLength: 100,
-                nullable: false,
+                nullable: true,
                 defaultValue: "",
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
@@ -24,7 +24,7 @@ namespace DataAccess.Migrations
                 table: "Patients",
                 type: "nvarchar(100)",
                 maxLength: 100,
-                nullable: false,
+                nullable: true,
                 defaultValue: "",
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
