@@ -62,13 +62,13 @@
                     <a asp-action="NewUser" class="btn-primary">For New User Create Your Password First</a>
                 </div>
                 <form asp-action="Login" method="post">
-                    <input asp-for="UserName"  class="fadeIn second" placeholder="Username">
+                    <input id="username" asp-for="UserName"  class="fadeIn second" placeholder="Username">
                     <span asp-validation-for="UserName" class="text-danger"></span>
                     <br />
-                    <input asp-for="Password" class="fadeIn third" placeholder="password">
+                    <input id="password" asp-for="Password" class="fadeIn third" placeholder="password">
                     <span asp-validation-for="Password" class="text-danger"></span>
                     <br />
-                    <input type="submit" class="fadeIn fourth" value="Log In">
+                    <input type="submit" class="fadeIn fourth" name="Login" value="Login">
                     <a asp-action="Intro">Back</a>
                 </form>
             </div>

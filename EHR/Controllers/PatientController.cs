@@ -137,16 +137,16 @@ namespace EHR.Controllers
             var PatientId = HttpContext.Session.GetInt32("PatientId");
             var patient =await _patientRepository.GetByIdAsync(PatientId.Value);
             var labTests = await _labRepository.GetLabByPatientNameAsync(patient.Username);
-                if (labTests.Count() > 0)
+            var map = _mapper.Map<IEnumerable<Lab>, IEnumerable<LabViewModel>>(labTests);
+            if (map.Count() > 0)
                 {
-                    var map = _mapper.Map<IEnumerable<Lab>, IEnumerable<LabViewModel>>(labTests);
                     return View(map);
                 }
                 else
                 {
                     TempData["Message"] = "No LabTest For This Patient";
                 }
-            return View(new LabViewModel());
+            return View(map);
         }
         public IActionResult LogoutP()
         {

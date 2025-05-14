@@ -19,7 +19,7 @@ namespace BusinessLogic.Repository
             _dbContext = dbContext;
         }
 
-        public async Task<Patient> GetByPatientNameAsync(string username) => await _dbContext.Patients.Where(S => S.Username == username).FirstOrDefaultAsync();
+        public async Task<Patient> GetByPatientNameAsync(string username) =>    await _dbContext.Patients.Where(S => S.Username == username).FirstOrDefaultAsync();
 
     }
 }
