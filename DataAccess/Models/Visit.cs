@@ -18,7 +18,7 @@ namespace DataAccess.Models
         public Doctors Doctor { get; set; }
         public string Date {  get; set; }
         public string? Diagnosis {  get; set; }
-        public DateTime FollowUpDate {  get; set; }
+        public DateTime? FollowUpDate {  get; set; }
         public string? TreatmentPlan {  get; set; }
         public string ReasonForVisit {  get; set; }
         public string VisitType {  get; set; }

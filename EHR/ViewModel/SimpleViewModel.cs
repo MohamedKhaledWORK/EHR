@@ -14,7 +14,7 @@ namespace EHR.ViewModel
         public string? Diagnosis { get; set; }
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
-        public DateTime FollowUpDate { get; set; } = DateTime.Now;
+        public DateTime? FollowUpDate { get; set; } = DateTime.Now;
         public string? TreatmentPlan { get; set; }
 
         public string ReasonForVisit { get; set; }

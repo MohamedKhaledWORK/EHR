@@ -4,6 +4,7 @@ using DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(EHRdbContext))]
-    partial class EHRdbContextModelSnapshot : ModelSnapshot
+    [Migration("20250515140332_ANYTHING")]
+    partial class ANYTHING
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +47,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("DoctorAvailabilities", (string)null);
+                    b.ToTable("DoctorAvailabilities");
                 });
 
             modelBuilder.Entity("DataAccess.Models.Doctors", b =>
@@ -75,7 +77,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("StaffId");
 
-                    b.ToTable("Doctors", (string)null);
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("DataAccess.Models.Lab", b =>
@@ -110,7 +112,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("LabTests", (string)null);
+                    b.ToTable("LabTests");
                 });
 
             modelBuilder.Entity("DataAccess.Models.MedicationPrescription", b =>
@@ -154,7 +156,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("MedicationPrescriptions", (string)null);
+                    b.ToTable("MedicationPrescriptions");
                 });
 
             modelBuilder.Entity("DataAccess.Models.Patient", b =>
@@ -212,7 +214,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patients", (string)null);
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("DataAccess.Models.Staff", b =>
@@ -245,7 +247,7 @@ namespace DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Staff", (string)null);
+                    b.ToTable("Staff");
                 });
 
             modelBuilder.Entity("DataAccess.Models.Visit", b =>
@@ -289,7 +291,7 @@ namespace DataAccess.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Visits", (string)null);
+                    b.ToTable("Visits");
                 });
 
             modelBuilder.Entity("DataAccess.Models.DoctorAvailability", b =>
